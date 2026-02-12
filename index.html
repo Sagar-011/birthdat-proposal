@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff5f6d, #ffc371);
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      animation: pop 0.8s ease;
+      position: relative;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #ff3366;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    button {
+      margin: 10px 6px 0;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 20px;
+      background: #ff3366;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .yes { background: #28a745; }
+    .no { background: #dc3545; }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(1); opacity: 1; }
+      to { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1 id="title">🎉 Happy Birthday HER_NAME 🎉</h1>
+    <p id="message">
+      Aaj ka din tumhare liye bahut special hai 💖 <br>
+      Tumhari smile meri duniya ko bright kar deti hai ✨ <br>
+      Hamesha khush raho 🥰
+    </p>
+    <div id="buttons">
+      <button id="nextBtn">Next 👉</button>
+    </div>
+  </div>
+
+  <script>
+    let step = 0;
+    let noCount = 0;
+
+    const title = document.getElementById("title");
+    const message = document.getElementById("message");
+    const buttonsDiv = document.getElementById("buttons");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 700);
+
+    function showYesNo() {
+      buttonsDiv.innerHTML = `
+        <button class="yes" id="yesBtn">Yes 💖</button>
+        <button class="no" id="noBtn">No 😔</button>
+      `;
+
+      document.getElementById("yesBtn").onclick = onYes;
+      document.getElementById("noBtn").onclick = onNo;
+    }
+
+    function onYes() {
+      title.innerText = "🥰 Thank You!";
+      message.innerHTML =
+        "Tumne haa bol kar mera dil jeet liya ❤️<br>" +
+        "Main promise karta hoon hamesha tumhari respect karunga, " +
+        "tumhara khayal rakhunga aur tumhe kabhi hurt nahi karunga 💑<br><br>" +
+        "Happy Birthday once again, meri special person 🎂✨";
+      buttonsDiv.innerHTML = "";
+    }
+
+    function onNo() {
+      noCount++;
+
+      if (noCount === 1) {
+        title.innerText = "😔 Ek Baar Phir Soch Lo...";
+        message.innerHTML =
+          "Baby, aapne mujhe ‘No’ bola… 💔<br>" +
+          "Sach me thoda sa dil toot gaya hai…<br>" +
+          "Par main aapki feelings ki respect karta hoon ❤️<br>" +
+          "Ek baar phir se soch lo na…";
+        showYesNo();
+      } else {
+        title.innerText = "💔 Dil Bahut Dukha Hai...";
+        message.innerHTML =
+          "Shayad main utna important nahi hoon aapke liye… 😞<br>" +
+          "Par jo bhi ho, meri feelings sachchi thi ❤️<br>" +
+          "Main hamesha dua karunga ki aap khush raho…<br><br>" +
+          "Happy Birthday, chahe meri feelings ka jawab ‘No’ hi kyu na ho 🎂";
+        buttonsDiv.innerHTML = `
+          <button class="yes" onclick="onYes()">Yes 💖</button>
+          <button class="no" onclick="onNo()">No 😔</button>
+        `;
+      }
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (step === 0) {
+        title.innerText = "🎂 Just For You ❤️";
+        message.innerHTML =
+          "Tum sirf meri best friend nahi ho 💫 <br>" +
+          "Tum meri life ka sabse special part ho 💕 <br>" +
+          "Aaj ke din ek baat dil se kehni hai...";
+        step++;
+      } else {
+        title.innerText = "💍 Will You Be Mine?";
+        message.innerHTML =
+          "Main tumhe dil se pasand karta hoon ❤️ <br>" +
+          "Kya tum meri girlfriend banogi? 🥺";
+        showYesNo();
+      }
+    });
+  </script>
+
+</body>
+</html>
